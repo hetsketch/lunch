@@ -1,0 +1,29 @@
+.container
+  .row
+    .col-sm-12
+      %h1 Edit menus from #{@menu.created_at.day}, #{@menu.created_at.strftime("%B")}
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Price
+            %th Weight
+          %tbody
+          - @menu.menu_items.each do |mi|
+            %tr
+              %td= mi.name
+              %td= mi.price
+              %td= mi.weight
+              - if mi.category
+                %td= mi.category.name
+      = simple_form_for(@menu_item, url: {action: :update, controller: 'menus'}, :method => :put, html: { class: 'form-horizontal' }) do |f|
+        .inputs
+          = f.input :name
+          = f.input :price
+          = f.input :weight
+          = f.association :category, as: :select, prompt: "Choose category"
+        .actions
+          = f.button :submit
+
+
+

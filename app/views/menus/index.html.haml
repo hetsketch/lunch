@@ -1,0 +1,22 @@
+.container
+  %h2 Menu list
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th #
+        %th Date
+        %th View
+        %th Edit
+    %tbody
+    - @menu.each do |m|
+      %tr
+        %td= m.id
+        %td
+          %strong= m.created_at.strftime("%A, %b %d")
+        %td
+          %a{:href => menu_path(m)} View
+        %td
+          %a{:href => menu_path(m) + '/edit'} Edit
+
+
+

@@ -1,0 +1,33 @@
+.container
+  %h2 Menu # #{@menu.id}
+  %h3 First courses
+  - @menu.menu_items.each do |mi|
+    - if mi.category.name == 'First course'
+      %strong= mi.name
+      %span= mi.price
+      %br
+
+  %h3 Main courses
+  - @menu.menu_items.each do |mi|
+    - if mi.category.name == 'Main course'
+      %strong= mi.name
+      %span= mi.price
+      %br
+
+  %h3 Drinks
+  - @menu.menu_items.each do |mi|
+    - if mi.category.name == 'Drink'
+      %strong= mi.name
+      %span= mi.price
+      %br
+
+
+  %br
+  = simple_form_for(@order) do |f|
+    -#=f.collection_check_boxes :menu_items, @menu.menu_items, :id, :name, {:selected => @menu.id}, {:name => 'menu_item_ids[]'}
+    = f.association :menu_items, :as => :check_boxes
+    .submit
+      =f.submit
+    -#- @menus.menu_items.each do |mi|
+      -#= f.association :menu_items, as: :check_boxes
+    -#= f.collection_select :menu_items, MenuItes.all, :id, :name, {:selected => c.id}, {:name => 'business[category_ids][]'}
