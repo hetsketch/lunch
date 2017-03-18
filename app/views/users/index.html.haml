@@ -1,0 +1,15 @@
+.container
+  .row
+    %table.table.table-striped.table-bordered
+      %thead
+        %th Name
+        %th Email
+        %th Admin
+      %tbody
+        - @users.each do |u|
+          %tr
+            %td= u.name
+            %td= u.email
+            %td= u.admin
+
+
