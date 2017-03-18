@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Lunch</title>
-    <%= csrf_meta_tags %>
+!!!
+%html{:lang => "en"}
+  %head
+    %title Lunch
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
-</html>
+  %body
+    = render partial: 'partials/navigation'
+    - if notice
+      %p.alert.alert-success
+        = notice
+    - if alert
+      %p.alert.alert-danger
+        = alert
+    = yield
