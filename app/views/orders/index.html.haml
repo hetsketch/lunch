@@ -1,0 +1,27 @@
+.container
+  %h1 My orders
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th #
+        %th Date
+        %th Items
+        %th Total
+    %tbody
+    - @order.each do |o|
+      %tr
+        %td= o.id
+        %td
+          %strong= o.date.strftime("%A, %b %d")
+        %td
+        - total = 0
+        -@order.menu_items.each do |mi|
+          - total += mi.price
+          %span= mi.name
+        %td
+          = total
+
+
+
+
+
