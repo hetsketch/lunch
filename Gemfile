@@ -68,11 +68,15 @@ gem 'bcrypt', platforms: :ruby
 # PostgreSQL
 gem 'pg',  group: :production
 
-#Carrierwave
+# Carrierwave
 gem 'carrierwave', '~> 1.0'
 
-ruby "2.3.3"
+ruby "2.4.0"
 
 gem 'rake', '< 11.0'
+
+# Faker should be in development group too.
+# Otherwise uninitialized constant Faker (NameError) error will appear
+gem 'faker', group: [:development, :test]
 
 
