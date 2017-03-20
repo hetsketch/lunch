@@ -8,19 +8,27 @@
             %th Name
             %th Price
             %th Weight
+            -#%th Image
+            %th Category
+            - if current_user.admin
+              %th Delete
           %tbody
           - @menu.menu_items.each do |mi|
             %tr
               %td= mi.name
               %td= mi.price
               %td= mi.weight
+              -#%td= image_tag(mi.photo_url.to_s)
               - if mi.category
                 %td= mi.category.name
+              - if current_user.admin
+                %td= link_to 'Delete', menu_item_url(mi), method: :delete
       = simple_form_for(@menu_item, url: {action: :update, controller: 'menus'}, :method => :put, html: { class: 'form-horizontal' }) do |f|
         .inputs
           = f.input :name
           = f.input :price
           = f.input :weight
+          -#= f.file_field :photo
           = f.association :category, as: :select, prompt: "Choose category"
         .actions
           = f.button :submit

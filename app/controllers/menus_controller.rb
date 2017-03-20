@@ -10,16 +10,12 @@ class MenusController < ApplicationController
 
   # GET /menus/:id
   def show
-    @order = current_order
+    @order = Order.new
   end
 
   # GET /menus/:id/edit
   def edit
-    # if @menu.publish_date < 1.day.ago
-    #   redirect_to menu_path, alert: 'Not today menus'
-    # else
-      @menu_item = MenuItem.new
-    # end
+    @menu_item = MenuItem.new
   end
 
   # GET /menus/new
@@ -28,6 +24,14 @@ class MenusController < ApplicationController
 
   # POST /menus
   def create
+    if current_user.admin
+      @menu = Menu.new
+      @menu.publish_date = DateTime.now
+      @menu.menu_items << MenuItem.take(MenuItem.count)
+      @menu.save
+      redirect_to menus_path, alert: 'Menu created' and return
+    end
+    redirect_to menus_path, alert: 'Admins only!'
   end
 
   # PUT /menus/:id
@@ -49,6 +53,6 @@ class MenusController < ApplicationController
 
   # Strong parameters
   def menu_params
-    params.require(:menu_item).permit(:name, :price, :weight, :category_id)
+    params.require(:menu_item).permit(:name, :price, :weight, :category_id, :photo)
   end
 end

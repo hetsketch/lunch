@@ -1,3 +1,28 @@
 .container
-  .row
-    %h1 This is stats page
+  %h1 Users' orders
+  %table.table.table-striped
+    %thead
+      %tr
+        %th #
+        %th Name
+        %th Date
+        %th Items
+        %th Total
+    %tbody
+    - if @orders
+      -@orders.each do |o|
+        %tr
+          %td= o.id
+          %td= o.user.name
+          %td
+            %strong= o.date.strftime("%A, %b %d")
+          %td
+            -o.menu_items.each do |mi|
+              %p= mi.name
+          %td
+            %span= o.total
+
+  %h3= "Total lunch costs per today: #{Order.calculate_total_lunch_cost}"
+
+
+

@@ -24,16 +24,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_order
-    if !session[:order_id].nil?
-      Order.find(session[:order_id])
-    else
-      Order.new
-    end
-  end
-
   def authorize_admin
-    return unless !current_user.admin?
+    return if current_user.admin?
     redirect_to menus_path, alert: 'Admins only!'
   end
 

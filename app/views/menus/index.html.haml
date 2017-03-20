@@ -1,5 +1,7 @@
 .container
   %h2 Menu list
+  -if current_user.admin
+    =link_to "Create menu", menus_path, method: :post
   %table.table.table-striped.table-bordered
     %thead
       %tr

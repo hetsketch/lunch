@@ -7,11 +7,11 @@ class User < ApplicationRecord
   validates :name, :email, presence: true
   validates :name, length: {in: 3..20}
 
+  has_many :orders
+
   private
   def set_admin
     # set to admin field true if users table is empty
     self.admin = User.count == 0
   end
-
-  has_many :orders
 end
