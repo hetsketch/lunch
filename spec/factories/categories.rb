@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :category do
-    name "Category N"
+    name Faker::Food.unique.ingredient
   end
 end

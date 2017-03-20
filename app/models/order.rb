@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   validates :date, :user_id, presence: true
+  validates :menu_items, length: {minimum: 1, maximum: 3}
   before_save :calculate_total
 
   belongs_to :user
