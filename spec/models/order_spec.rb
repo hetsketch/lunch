@@ -28,6 +28,14 @@ describe Order do
     # It is 0 items now
     order.should have(1).error_on(:menu_items)
   end
-
-
+  
+  it 'should have one item per category' do
+    order = FactoryGirl.create :order
+    menu_item = FactoryGirl.create :menu_item
+    order.menu_items << menu_item
+    order.menu_items << menu_item
+    # Add two items with same categories
+    
+    order.should have(1).error_on(:menu_items)
+  end
 end
