@@ -5,6 +5,7 @@ class MenusController < ApplicationController
 
   # GET /menus
   def index
+    Menu.create_today_menu
     @menu = Menu.all
   end
 

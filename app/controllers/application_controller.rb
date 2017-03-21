@@ -10,11 +10,6 @@ class ApplicationController < ActionController::Base
     render file: "public/404.html", status: 404
   end
 
-  def current_menu
-    @current_menu = Menu.last
-  end
-
-
   def store_action
     return unless request.get?
     if (request.path != "/users/sign_in" &&

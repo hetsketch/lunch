@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     @order.save
     
     redirect_to orders_path and return if @order.errors.empty?
-    redirect_to menu_path(current_menu),
+    redirect_to menu_path(Menu.current_menu),
                 alert: 'Order has not created. Please, check 1 item per category'
   end
   
